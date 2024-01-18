@@ -1,0 +1,40 @@
+<!-- precio_producto_form.html -->
+
+{% extends 'aplicacion/base.html' %}
+{% block contenido %}
+  <h2>{% if is_update %}Editar{% else %}Nuevo{% endif %} Precio de Producto</h2>
+  <form method="post" action="{% if is_update %}{% url 'precio-update' pk=precio_producto.pk %}{% else %}{% url 'precio-create' %}{% endif %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    
+    <input type="text" id="id_producto_busqueda" placeholder="Buscar productos">
+    <button type="button" onclick="buscarProductos()">Buscar Productos</button>
+    
+    <div id="resultados-productos"></div>
+
+    <button type="submit">{% if is_update %}Actualizar{% else %}Crear{% endif %}</button>
+  </form>
+
+  <script>
+    function buscarProductos() {
+      const busqueda = document.querySelector('#id_producto_busqueda').value;
+      const url = `/buscar-productos/?q=${busqueda}`;
+      
+      fetch(url)
+        .then(response => response.json())
+        .then(data => mostrarResultados(data));
+    }
+
+    function mostrarResultados(resultados) {
+      const selectProducto = document.querySelector('#id_producto');
+      selectProducto.innerHTML = '';
+
+      resultados.forEach(producto => {
+        const option = document.createElement('option');
+        option.value = producto.id;
+        option.text = producto.nombre;
+        selectProducto.appendChild(option);
+      });
+    }
+  </script>
+{% endblock %}

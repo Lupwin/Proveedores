@@ -1,0 +1,10 @@
+body{
+    background-color: lightgrey;
+}
+article{
+    background-color: wheat;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 15px;
+
+}

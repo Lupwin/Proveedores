@@ -1,0 +1,15 @@
+{% extends 'aplicacion/base.html' %}
+
+{% block contenido %}
+  <h2>Proveedores del Producto: {{ producto.nombre }}</h2>
+
+  <ul>
+    {% for proveedor_con_precio in proveedores_con_precios %}
+      <li>
+        {{ proveedor_con_precio.proveedor__nombre }} - Precio Actual: {{ proveedor_con_precio.precio_actual }} - Última Actualización: {{ proveedor_con_precio.fecha_actualizacion }}
+      </li>
+      {% empty%}
+            <p>No tiene Proveedor asignado</p>
+    {% endfor %}
+  </ul>
+{% endblock %}

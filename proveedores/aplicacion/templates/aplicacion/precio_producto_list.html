@@ -1,0 +1,48 @@
+{% extends 'aplicacion/base.html' %}
+{% load static %}
+{ {% block css_adicionales %}
+<link rel="stylesheet" href="{% static 'aplicacion\css\precio_producto_list.css' %}">
+{% endblock %}}
+
+{% block contenido %}
+<form method="GET" action="{% url 'precio-list' %}" class="form-inline my-2 my-lg-0">
+  <input class="form-control mr-sm-2" type="text" name="q" value="{{ q }}" placeholder="Buscar productos" aria-label="Search">
+  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+</form>
+
+
+<table>
+  <tr>
+    <th>Producto</th>
+    <th>Proveedor</th>
+    <th>Precio Actual</th>
+  </tr>
+  {% for precio in precios %}
+  <tr>
+    <td>
+      <div>
+        {% if precio.producto %}
+          <a href="{% url 'precio_producto_detalle' precio.producto.nombre %}">
+            {{ precio.producto.nombre }}
+          </a>
+        {% else %}
+          <span>Producto no asociado en este registro de precio</span>
+        {% endif %}
+      </div>
+    </td>
+    <td>
+      {% if precio.producto %}
+        {{ precio.proveedor.nombre }}
+      {% else %}
+        <span></span> <!-- Puedes ajustar esto según tus necesidades -->
+      {% endif %}
+    </td>
+    <td>
+      <span>u$s: {{ precio.precio_actual }}</span>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+  
+{% endblock %}

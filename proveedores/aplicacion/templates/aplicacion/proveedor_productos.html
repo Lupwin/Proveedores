@@ -1,0 +1,12 @@
+{% extends 'aplicacion/base.html' %}
+
+{% block contenido %}
+  <h2>Productos del proveedor {{ proveedor.nombre }}</h2>
+
+  <ul>
+    {% for producto in productos_con_precios_actuales %}
+      <li>{{ producto.nombre }} - Precio Actual: {{ producto.precio_actual }}- Última Actualización: {{ producto.precioproducto_set.last.fecha_actualizacion }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+

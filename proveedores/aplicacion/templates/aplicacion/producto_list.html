@@ -1,0 +1,36 @@
+{% extends 'aplicacion/base.html' %}
+
+{% block contenido %}
+  <h2>Listado de Productos</h2>
+  <form method="GET" action="{% url 'producto-list' %}" class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" type="text" name="q" value="{{ q }}" placeholder="Buscar productos" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+  </form>
+  
+    {% for producto in productos %}
+    <div>
+      <a href="{% url 'productos_proveedor' producto.id %}">{{ producto.nombre }}</a>
+    </div>
+      
+    {% endfor %}
+  
+
+  <div class="pagination">
+    <span class="step-links">
+        {% if productos.has_previous %}
+            <a href="?page=1">&laquo; Principio</a>
+            <a href="?page={{ productos.previous_page_number }}">Anterior</a>
+        {% endif %}
+
+        <span class="current">
+            Página {{ productos.number }} de {{ productos.paginator.num_pages }}.
+        </span>
+
+        {% if productos.has_next %}
+            <a href="?page={{ productos.next_page_number }}">Siguiente</a>
+            <a href="?page={{ productos.paginator.num_pages }}">Ultima Pagina &raquo;</a>
+        {% endif %}
+    </span>
+  </div>
+  
+{% endblock %}

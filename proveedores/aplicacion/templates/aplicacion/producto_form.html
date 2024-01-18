@@ -1,0 +1,15 @@
+{% extends 'aplicacion/base.html' %}
+{% block contenido %}
+  <h2>{% if is_update %}Editar{% else %}Nuevo{% endif %} Producto</h2>
+  <form method="post" action="{% if is_update %}{% url 'producto-update' pk=producto.pk %}{% else %}{% url 'producto-create' %}{% endif %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% if is_update %}Actualizar{% else %}Crear{% endif %}</button>
+  </form>
+  <script>
+    // Limpiar el área de texto después de cargar la página
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("id_nombre").value = "";
+    });
+  </script>
+{% endblock %}

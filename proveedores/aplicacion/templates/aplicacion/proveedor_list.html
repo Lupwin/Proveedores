@@ -1,0 +1,35 @@
+{% extends 'aplicacion/base.html' %}
+
+
+{% block contenido %}
+  <h2>Listado de Proveedores</h2>
+  <form method="GET" action="{% url 'proveedor-list' %}" class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" type="text" name="q" value="{{ q }}" placeholder="Buscar proveedores" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+  </form>
+
+  {% for proveedor in proveedores %}
+    <div>
+      <h3><a href="{% url 'proveedor_productos' proveedor.id %}">{{ proveedor.nombre }}</a></h3>
+      <!-- Otros campos del proveedor si los tienes -->
+    </div>
+  {% endfor %}
+
+  <div class="pagination">
+    <span class="step-links">
+        {% if proveedores.has_previous %}
+            <a href="?page=1">&laquo; Principio</a>
+            <a href="?page={{ proveedores.previous_page_number }}">Anterior</a>
+        {% endif %}
+
+        <span class="current">
+            Página {{ proveedores.number }} de {{ proveedores.paginator.num_pages }}.
+        </span>
+
+        {% if proveedores.has_next %}
+            <a href="?page={{ proveedores.next_page_number }}">Siguiente</a>
+            <a href="?page={{ proveedores.paginator.num_pages }}">Ultima Pagina &raquo;</a>
+        {% endif %}
+    </span>
+  </div>
+{% endblock %}

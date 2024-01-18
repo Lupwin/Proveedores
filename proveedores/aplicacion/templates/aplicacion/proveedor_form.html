@@ -1,0 +1,10 @@
+{% extends 'aplicacion/base.html' %}
+
+{% block contenido %}
+  <h2>{% if is_update %}Editar{% else %}Nuevo{% endif %} Proveedor</h2>
+  <form method="post" action="{% if is_update %}{% url 'proveedor-update' pk=proveedor.pk %}{% else %}{% url 'proveedor-create' %}{% endif %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% if is_update %}Actualizar{% else %}Crear{% endif %}</button>
+  </form>
+{% endblock %}

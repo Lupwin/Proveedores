@@ -1,0 +1,41 @@
+{% extends 'aplicacion/base.html' %}
+
+{% block contenido %}
+  <h2>Historial de Precios de {{ producto.nombre }}</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Precio</th>
+        <th>Proveedor</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for precio in precios_pagina %}
+        <tr>
+          <td>{{ precio.fecha_actualizacion }}</td>
+          <td>{{ precio.precio_actual }}</td>
+          <td>{{ precio.proveedor.nombre }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+  <div class="pagination">
+    <span class="step-links">
+        {% if precios_pagina.has_previous %}
+            <a href="?page=1">&laquo; Principio</a>
+            <a href="?page={{ precios_pagina.previous_page_number }}">Anterior</a>
+        {% endif %}
+
+        <span class="current">
+            Página {{ precios_pagina.number }} de {{ precios_pagina.paginator.num_pages }}.
+        </span>
+
+        {% if precios_pagina.has_next %}
+            <a href="?page={{ precios_pagina.next_page_number }}">Siguiente</a>
+            <a href="?page={{ precios_pagina.paginator.num_pages }}">Ultima Pagina &raquo;</a>
+        {% endif %}
+    </span>
+  </div>
+{% endblock %}

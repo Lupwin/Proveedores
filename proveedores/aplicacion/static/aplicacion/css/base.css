@@ -1,0 +1,41 @@
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+   
+  }
+
+
+footer {
+    background: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+footer span {
+    margin-right: 20px; /* Espacio entre los elementos del pie de página */
+}
+.logo{
+    height: 500px;
+    width: 500px;
+}
+header{
+    color: white;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    background-size:  100% 500%;
+    background-image: url('img/fondo9.jpeg');
+    background-repeat: no-repeat;
+    background-position: center 47%; /* Centra la imagen en el fondo */
+    height: 120px;
+    padding-top: 100;
+}
